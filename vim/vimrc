@@ -1,0 +1,123 @@
+" vundle settings
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+
+" bundles
+Plugin 'scrooloose/nerdtree'
+Plugin 'msanders/snipmate.vim'
+Plugin 'tpope/vim-surround'
+Plugin 'simplecommenter'
+Plugin 'AutoComplPop'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'altercation/vim-colors-solarized'
+
+" vundle settings
+call vundle#end()
+filetype indent plugin on
+
+" indent
+set expandtab
+set autoindent
+set smartindent
+set cindent
+set ignorecase
+set hls
+
+" tab and space
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+
+" backup info
+set backup
+set backupdir=$HOME/.vim/backup/
+if exists("*mkdir") && !isdirectory($HOME."/.vim/backup")
+    call mkdir($HOME."/.vim/backup")
+endif
+
+" undo
+set undofile
+set undodir=$HOME/.vim/undo/
+if exists("*mkdir") && !isdirectory($HOME."/.vim/undo")
+    call mkdir($HOME."/.vim/undo")
+endif
+
+" set line break
+set nowrap
+set linebreak
+"set showbreak=>>\ 
+
+" other settings
+syntax on
+set nu
+set ruler
+set bs=2
+set showcmd
+set clipboard=unnamed
+set foldmethod=indent
+set nolist
+
+" Save last postion
+if has("autocmd")
+   autocmd BufReadPost *
+      \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+      \   exe "normal g'\"" |
+      \ endif
+endif
+
+" key mapping
+let mapleader=","
+nmap ; :
+vmap ; :
+nmap j gj
+nmap k gk
+vmap j gj
+vmap k gk
+imap <C-D>      <DEL>
+nmap <F7>       :w<CR>:!perl %<CR>
+nmap <C-L>      :set nu!<CR>
+nmap <C-n>      gt
+nmap <C-p>      gT
+imap <C-a>      <HOME>
+imap <C-e>      <END>
+imap <C-f>      <RIGHT>
+imap <C-b>      <LEFT>
+nmap <C-J>      ddp==
+nmap <C-K>      ddkP==
+nmap <Leader>n  <plug>NERDTreeTabsToggle<CR>
+nmap <Leader>b  :e ++enc=big5<CR>
+nmap <Leader>u  :e ++enc=utf-8<CR>
+nmap <Leader>p  :set paste!<CR>
+nmap <Leader>r  :set wrap!<CR>
+nmap <Leader>ev :tabnew $MYVIMRC<CR>
+nmap <Leader>h  :set hls!<CR>
+nmap <Leader>s  :w<CR>:source %<CR>
+nmap <Leader>i  :set list!<CR>
+
+" Encoding
+set fileencodings=utf-8,big5,euc-jp,gbk,euc-kr,utf-bom,iso8859-1
+
+" theme setting
+set t_Co=256
+set cursorline
+set background=dark
+silent! colorscheme solarized
+
+" set status line
+set laststatus=2
+set statusline=%{(&paste)?'[p]':''}
+set statusline+=%m%f
+set statusline+=%=
+set statusline+=(%{mode()})
+set statusline+=\ \ 
+set statusline+=[%{&fenc}]
+set statusline+=\ \ 
+set statusline+=[%{&ft!=''?&ft:'none'}]
+set statusline+=\ \ 
+set statusline+=Col\ %c,\ Line\ %l/%L
+set statusline+=\ \ 
+set statusline+=%p%%\ 
