@@ -3,7 +3,6 @@ FROM phusion/baseimage:latest
 # apt-get
 RUN apt-get update && apt-cache showpkg tmux && apt-get install -y \
     gcc \
-    gdb \
     git \
     make \
     netcat \
@@ -12,16 +11,18 @@ RUN apt-get update && apt-cache showpkg tmux && apt-get install -y \
     python2.7-dev \
     python-pip \
     ruby \
+    wget \
     vim
 
-# pwntools
-RUN pip install pwntools
+# old gdb for peda
+RUN curl -o /tmp/gdb.deb http://security.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.4-2012.02-0ubuntu2_amd64.deb \
+    && dpkg -i /tmp/gdb.deb
 
-# rubypwn
-RUN git clone https://bitbucket.org/atdog/rubypwn.git ~/rubypwn
-
-# peda
-RUN git clone https://github.com/longld/peda.git ~/peda
+# tools
+RUN pip install pwntools ropgadget
+RUN git clone https://bitbucket.org/atdog/rubypwn.git ~/rubypwn \
+    && git clone https://github.com/longld/peda.git ~/peda \
+    && git clone https://github.com/niklasb/libc-database.git ~/libc-database && cd ~/libc-database && ./get
 
 # enable ssh
 RUN rm -f /etc/service/sshd/down && /etc/my_init.d/00_regen_ssh_host_keys.sh
