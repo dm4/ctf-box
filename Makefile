@@ -5,4 +5,4 @@ build:
 
 run:
 	mkdir -p ./share
-	docker run -p 2222:22 -v $(PWD)/share:/root/share --rm -it dm4tw/ctf
+	docker run --privileged -p 2222:22 -v $(PWD)/share:/root/share --rm -it dm4tw/ctf
