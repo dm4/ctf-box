@@ -2,15 +2,20 @@ FROM phusion/baseimage:latest
 
 # apt-get
 RUN apt-get update && apt-cache showpkg tmux && apt-get install -y \
+    autojump \
     gcc \
     git \
+    libc6-i386 \
+    libc6-dev-i386 \
+    ltrace \
     make \
-    netcat \
-    netcat6 \
+    man \
+    nmap \
     python2.7 \
     python2.7-dev \
     python-pip \
     ruby \
+    strace \
     wget \
     vim
 
@@ -19,8 +24,9 @@ RUN curl -o /tmp/gdb.deb http://security.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7
     && dpkg -i /tmp/gdb.deb
 
 # tools
-RUN pip install pwntools ropgadget
-RUN git clone https://bitbucket.org/atdog/rubypwn.git ~/rubypwn \
+RUN pip install pwntools ropgadget \
+    && gem install bundler
+RUN git clone https://bitbucket.org/atdog/rubypwn.git ~/rubypwn && cd ~/rubypwn && bundle install \
     && git clone https://github.com/longld/peda.git ~/peda \
     && git clone https://github.com/niklasb/libc-database.git ~/libc-database && cd ~/libc-database && ./get
 
