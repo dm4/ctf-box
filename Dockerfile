@@ -24,7 +24,7 @@ RUN curl -o /tmp/gdb.deb http://security.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7
     && dpkg -i /tmp/gdb.deb
 
 # tools
-RUN pip install pwntools ropgadget \
+RUN pip install pwntools capstone ropgadget \
     && gem install bundler
 RUN git clone https://bitbucket.org/atdog/rubypwn.git ~/rubypwn && cd ~/rubypwn && bundle install \
     && git clone https://github.com/longld/peda.git ~/peda \
