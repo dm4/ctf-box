@@ -7,9 +7,11 @@ RUN apt-get update && apt-cache showpkg tmux && apt-get install -y \
     git \
     libc6-i386 \
     libc6-dev-i386 \
+    libssl-dev \
     ltrace \
     make \
     man \
+    nasm \
     nmap \
     python2.7 \
     python2.7-dev \
