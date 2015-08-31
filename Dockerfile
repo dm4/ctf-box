@@ -27,7 +27,7 @@ RUN curl -o /tmp/gdb.deb http://security.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7
 
 # tools
 RUN pip install pwntools capstone ropgadget \
-    && gem install bundler rubypwn
+    && gem install bundler # rubypwn
 RUN git clone https://github.com/longld/peda.git ~/peda \
     && git clone https://github.com/niklasb/libc-database.git ~/libc-database && cd ~/libc-database && ./get
 
