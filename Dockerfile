@@ -32,6 +32,10 @@ RUN git clone https://bitbucket.org/atdog/rubypwn.git ~/rubypwn && cd ~/rubypwn 
     && git clone https://github.com/longld/peda.git ~/peda \
     && git clone https://github.com/niklasb/libc-database.git ~/libc-database && cd ~/libc-database && ./get
 
+# qira
+RUN cd ~/ && wget -qO- qira.me/dl | unxz | tar x \
+    && cd qira && yes | ./install.sh
+
 # enable ssh
 RUN rm -f /etc/service/sshd/down && /etc/my_init.d/00_regen_ssh_host_keys.sh
 
