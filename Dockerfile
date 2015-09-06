@@ -22,6 +22,13 @@ RUN apt-get update && apt-cache showpkg tmux && apt-get install -y \
     wget \
     vim
 
+# ruby1.9.1 -> ruby2.0
+RUN cd /usr/bin \
+    && rm -f gem irb ruby \
+    && ln -s gem2.0 gem \
+    && ln -s irb2.0 irb \
+    && ln -s ruby2.0 ruby
+
 # old gdb for peda
 RUN curl -o /tmp/gdb.deb http://security.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.4-2012.02-0ubuntu2_amd64.deb \
     && dpkg -i /tmp/gdb.deb
