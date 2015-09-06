@@ -17,7 +17,7 @@ RUN apt-get update && apt-cache showpkg tmux && apt-get install -y \
     python2.7 \
     python2.7-dev \
     python-pip \
-    ruby \
+    ruby2.0 \
     strace \
     wget \
     vim
