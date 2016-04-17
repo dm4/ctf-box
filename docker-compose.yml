@@ -1,0 +1,7 @@
+version: '2'
+services:
+  ctf:
+    image: dm4tw/ctf-box
+    privileged: true
+    ports:
+      - "2222:22"
