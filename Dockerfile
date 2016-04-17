@@ -22,6 +22,16 @@ RUN dpkg --add-architecture i386 && apt-get update && apt-cache showpkg tmux && 
     wget \
     vim
 
+# compile glibc-2.19 with debug symbol
+ADD http://ftp.gnu.org/gnu/glibc/glibc-2.19.tar.gz /tmp/
+RUN mkdir -p /root/glibc/64 /root/glibc/32 \
+    && tar zxvf /tmp/glibc-2.19.tar.gz -C /root/glibc \
+    && mkdir -p /root/glibc/glibc-2.19/build64 /root/glibc/glibc-2.19/build32 \
+    && cd /root/glibc/glibc-2.19/build64 \
+    && CFLAGS="-g -g3 -ggdb -gdwarf-4 -Og"  \
+        CXXFLAGS="-g -g3 -ggdb -gdwarf-4 -Og" \
+        ../configure --prefix=/root/glibc/64
+
 # ruby1.9.1 -> ruby2.0
 RUN cd /usr/bin \
     && rm -f gem irb ruby \
