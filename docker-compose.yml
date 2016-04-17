@@ -3,5 +3,6 @@ services:
   ctf:
     image: dm4tw/ctf-box
     privileged: true
+    dns: 8.8.8.8
     ports:
       - "2222:22"
