@@ -31,7 +31,14 @@ RUN mkdir -p /root/glibc/64 /root/glibc/32 \
     && cd /root/glibc/glibc-2.19/build64 \
     && CFLAGS="-g -g3 -ggdb -gdwarf-4 -Og"  \
         CXXFLAGS="-g -g3 -ggdb -gdwarf-4 -Og" \
-        ../configure --prefix=/root/glibc/64
+        ../configure --prefix=/root/glibc/64 \
+    && make install \
+    && cd /root/glibc/glibc-2.19/build32 \
+    && CC="gcc -m32" CXX="g++ -m32" \
+        CFLAGS="-g -g3 -ggdb -gdwarf-4 -Og" \
+        CXXFLAGS="-g -g3 -ggdb -gdwarf-4 -Og" \
+        ../configure --prefix=/root/glibc/32 --host=i686-linux-gnu \
+    && make install
 
 # ruby1.9.1 -> ruby2.0
 RUN cd /usr/bin \
