@@ -3,6 +3,7 @@ FROM phusion/baseimage:latest
 # apt-get
 RUN dpkg --add-architecture i386 && apt-get update && apt-cache showpkg tmux && apt-get install -y \
     autojump \
+    gawk \
     gcc \
     git \
     ipython \
