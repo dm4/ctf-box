@@ -58,7 +58,8 @@ RUN git clone https://github.com/longld/peda.git ~/peda \
     && git clone https://github.com/niklasb/libc-database.git ~/libc-database && cd ~/libc-database && ./get
 
 # qira
-RUN wget -qO- https://github.com/BinaryAnalysisPlatform/qira/archive/v1.2.tar.gz \
+RUN cd /root \
+    && wget -qO- https://github.com/BinaryAnalysisPlatform/qira/archive/v1.2.tar.gz \
     | tar zx && cd qira-1.2 && ./install.sh
 
 # enable ssh
