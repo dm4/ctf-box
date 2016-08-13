@@ -20,6 +20,7 @@ RUN dpkg --add-architecture i386 && apt-get update && apt-cache showpkg tmux && 
     python-pip \
     ruby \
     strace \
+    sudo \
     wget \
     vim
 
