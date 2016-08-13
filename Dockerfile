@@ -18,7 +18,7 @@ RUN dpkg --add-architecture i386 && apt-get update && apt-cache showpkg tmux && 
     python2.7 \
     python2.7-dev \
     python-pip \
-    ruby2.0 \
+    ruby \
     strace \
     wget \
     vim
@@ -32,20 +32,13 @@ RUN mkdir -p /root/glibc/64 /root/glibc/32 \
     && CFLAGS="-g -g3 -ggdb -gdwarf-4 -Og"  \
         CXXFLAGS="-g -g3 -ggdb -gdwarf-4 -Og" \
         ../configure --prefix=/root/glibc/64 \
-    && make install \
+    && make all && make install \
     && cd /root/glibc/glibc-2.19/build32 \
     && CC="gcc -m32" CXX="g++ -m32" \
         CFLAGS="-g -g3 -ggdb -gdwarf-4 -Og" \
         CXXFLAGS="-g -g3 -ggdb -gdwarf-4 -Og" \
         ../configure --prefix=/root/glibc/32 --host=i686-linux-gnu \
-    && make install
-
-# ruby1.9.1 -> ruby2.0
-RUN cd /usr/bin \
-    && rm -f gem irb ruby \
-    && ln -s gem2.0 gem \
-    && ln -s irb2.0 irb \
-    && ln -s ruby2.0 ruby
+    && make all && make install
 
 # old gdb for peda
 RUN curl -o /tmp/gdb.deb http://security.ubuntu.com/ubuntu/pool/main/g/gdb/gdb_7.4-2012.02-0ubuntu2_amd64.deb \
